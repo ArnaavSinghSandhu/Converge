@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model Op{
+    seqNum  Int     @id @default(autoincrement())
+    docId   String
+    clientId String
+    type    String
+    payload Json
+    createdAt   DateTime    @default(now())
+}
+
+model SnapShot{
+    id  String  @id @default(uuid())
+    docId   String
+    state   Json
+    lastSeq     Int
+    createdAt   DateTime @default(now())
+}
